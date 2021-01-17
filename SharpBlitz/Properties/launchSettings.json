@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "SharpBlitz-Build-Watch": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "commandLineArgs": "watch build --no-restore",
+      "workingDirectory": "./",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

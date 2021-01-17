@@ -1,0 +1,16 @@
+<div fxLayout="column" fxFlexFill>
+  <as-split unit="percent" direction="vertical" fxFlex>
+    <as-split-area size="75" minSize="30" #area1="asSplitArea" fxLayout="column">
+      <ngx-monaco-editor #editor (onInit)="onEditorInit($event)" class="my-code-editor" fxFlex [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+    </as-split-area>
+    <as-split-area size="25" minSize="25" #area2="asSplitArea" fxLayout="column">
+      <div class="console" #console fxFlex>
+        <p class="log-message" *ngFor="let msg of logStream" [class.error]="msg.isError">{{msg.message}}</p>
+      </div>
+      <div fxLayout="row">
+        <button mat-raised-button (click)="compile()">Compile</button>
+        <button mat-raised-button [disabled]="lastSuccessfulCompilation == null" (click)="run()">Run</button>
+      </div>
+    </as-split-area>
+  </as-split>
+</div>

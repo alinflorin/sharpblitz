@@ -1,0 +1,31 @@
+.my-code-editor {
+  .editor-container {
+    height: 100%;
+  }
+}
+
+:host {
+  ngx-monaco-editor {
+    height: 100% !important;
+  }
+
+
+  as-split-area {
+    overflow: hidden;
+  }
+
+  .console {
+    min-height: 100px;
+    background: #1e1e1e;
+    color: white;
+    overflow: auto;
+  }
+
+  p.log-message {
+    color: white;
+  }
+
+  p.log-message.error {
+    color: red;
+  }
+}

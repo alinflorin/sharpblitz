@@ -1,0 +1,11 @@
+:host {
+  .loaded {
+    font-weight: bold;
+  }
+
+  .sidebar-content {
+    min-width: 100px;
+    height: 100%;
+    max-width: 300px;
+  }
+}

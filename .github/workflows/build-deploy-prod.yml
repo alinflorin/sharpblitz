@@ -1,0 +1,76 @@
+name: SharpBlitz
+
+on:
+  push:
+    paths-ignore:
+    - '.vscode'
+    - '.gitattributes'
+    - '.gitignore'
+    - 'Dockerfile'
+    - '.dockerignore'
+    - 'LICENSE'
+    - 'README.md'
+    - 'start_dev.bat'
+    - 'start_dev.sh'
+    - 'SharpBlitz-UI/e2e/**'
+    - 'SharpBlitz-UI/'
+    - 'SharpBlitz-UI/ssl/**'
+    - 'SharpBlitz-UI/README.md'
+    - 'SharpBlitz-UI/.gitignore'
+    - 'SharpBlitz-UI/.editorconfig'
+    - 'SharpBlitz/Properties/**'
+
+    branches:
+    - master
+    - develop
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Checkout repo
+      uses: actions/checkout@v1
+    - name: Use Node.js 10.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: Use DotNet SDK 3
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.0.100'
+    - name: Build Blazor
+      working-directory: SharpBlitz
+      run: dotnet build --configuration Release
+    - name: Angular npm install
+      working-directory: 'SharpBlitz-UI'
+      run: npm install
+    - name: Angular version
+      working-directory: 'SharpBlitz-UI'
+      run: npm run version
+    - name: Angular build
+      working-directory: SharpBlitz-UI
+      run: npm run ng build -- --prod
+    - name: Publish artifacts
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: dist
+        path: dist
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v1
+      - name: Download Artifact
+        uses: actions/download-artifact@v1.0.0
+        with:
+          name: dist
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@v1.1.0
+        with:
+          args: deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

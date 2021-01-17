@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Features" Version="3.3.1" />
+    <PackageReference Include="SQLitePCLRaw.core" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharpBlitz.CodeAnalysis.Abstractions\SharpBlitz.CodeAnalysis.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,13 @@
+<div fxLayout="column" class="sidebar-content">
+    <div fxFlex="70%" fxLayout="column" class="scrollable">
+      <h2>GAC</h2>
+      <a class="clickable" (click)="toggleGacLoadingUnloading(gac)" [class.loaded]="isLoadedInGac(gac)"
+            *ngFor="let gac of gacDependencies">{{gac}}</a>
+    </div>
+    <div fxFlex="30%" fxLayout="column" class="scrollable">
+        <h2>Browse</h2>
+        <a (click)="unloadUploadedDependency(x)" class="clickable loaded"
+            *ngFor="let x of d.uploadedDependencies">{{x}}</a> <br />
+        <input type="file" value="Browse" multiple="true" (change)="onDllUploaded($event.target.files)" accept=".dll" />
+      </div>
+  </div>

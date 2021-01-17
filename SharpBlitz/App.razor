@@ -1,0 +1,55 @@
+﻿@using Microsoft.JSInterop
+@using Compiler.Abstractions
+@using CodeAnalysis.Abstractions
+@using Common.Assembly
+@using Runner.Abstractions
+@code {
+    [JSInvokable]
+    public static async Task<bool> Healthcheck()
+    {
+        await SharpBlitzStatic.IdeStore.PreloadRequiredAsms();
+        return true;
+    }
+
+    [JSInvokable]
+    public static async Task<PreloadGacAssemblyResult> PreloadGacAssembly(AssemblyDefinition input)
+    {
+        return await SharpBlitzStatic.IdeStore.PreloadGacAssembly(input);
+    }
+
+    [JSInvokable]
+    public static async Task<UnloadGacAssemblyResult> UnloadGacAssembly(AssemblyDefinition input)
+    {
+        return await SharpBlitzStatic.IdeStore.UnloadGacAssembly(input);
+    }
+
+    [JSInvokable]
+    public static async Task<PreloadUploadedAssemblyResult> PreloadUploadedAssembly(AssemblyDefinition input)
+    {
+        return await SharpBlitzStatic.IdeStore.PreloadUploadedAssembly(input);
+    }
+
+    [JSInvokable]
+    public static async Task<UnloadUploadedAssemblyResult> UnloadUploadedAssembly(AssemblyDefinition input)
+    {
+        return await SharpBlitzStatic.IdeStore.UnloadUploadedAssembly(input);
+    }
+
+    [JSInvokable]
+    public static async Task<CodeAnalysisResult> Analyze(CodeAnalysisInput input)
+    {
+        return await SharpBlitzStatic.Analyzer.GetIntellisense(input);
+    }
+
+    [JSInvokable]
+    public static async Task<CompilationResult> Compile(CompilationInput input)
+    {
+        return await SharpBlitzStatic.Compiler.Compile(input);
+    }
+
+    [JSInvokable]
+    public static async Task LoadAndRun(RunnerInput input)
+    {
+        await SharpBlitzStatic.Runner.LoadAndRun(input);
+    }
+}

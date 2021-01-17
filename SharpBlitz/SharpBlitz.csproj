@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <LangVersion>Latest</LangVersion>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <OutputPath>bin</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview9.19465.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview9.19465.2" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.0.0-preview9.19465.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Features" Version="3.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharpBlitz.CodeAnalysis.Roslyn\SharpBlitz.CodeAnalysis.Roslyn.csproj" />
+    <ProjectReference Include="..\SharpBlitz.Compiler.Roslyn\SharpBlitz.Compiler.Roslyn.csproj" />
+    <ProjectReference Include="..\SharpBlitz.Runner.Roslyn\SharpBlitz.Runner.Roslyn.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="dist\_framework\_bin\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="dist\_framework\_bin\netstandard.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="dist\_framework\_bin\Microsoft.CodeAnalysis.CSharp.Features.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
